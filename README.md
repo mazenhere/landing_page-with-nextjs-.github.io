@@ -1,38 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Setting up Next.js Application with AWS Amplify using Terraform
+Overview
+In this guide, we will go through the process of deploying a Next.js sample application on AWS Amplify using Terraform to provision the infrastructure and setting up a CI/CD pipeline using Amplify's inbuilt functionality. The application should be a static site build with Next.js, and we'll assume you have basic knowledge of Git, GitHub, AWS, Terraform, and Next.js.
 
-## Getting Started
+Step 1: Search and Clone the Next.js Sample Application
+Search for a publicly available Next.js sample application on GitHub or any other source.
+Once you find a suitable application, fork or clone the repository to your GitHub account.
+Step 2: Set up the AWS Amplify Project
+Sign in to the AWS Management Console and navigate to the AWS Amplify service.
 
-First, run the development server:
+Click on "Get Started" if you haven't used Amplify before.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Select "Connect app" and choose "GitHub" as the repository service.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Authorize Amplify to access your GitHub account and select the repository containing the Next.js application.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Choose the branch you want to deploy (e.g., main/master).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Configure the build settings according to your Next.js application requirements. For most Next.js applications, the default settings should work well.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Click "Next" and then "Save and Deploy" to initiate the deployment. Amplify will automatically build and deploy your Next.js application.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+After the deployment is successful, Amplify will provide you with a URL to access your deployed application.
 
-## Learn More
+Step 3: Provision Amplify Infrastructure with Terraform
+Make sure you have Terraform installed on your local machine.
 
-To learn more about Next.js, take a look at the following resources:
+Create a new directory for your Terraform project and navigate to it in the terminal.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Inside the directory, create a new file named main.tf to define the Terraform configuration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Add the necessary Terraform configuration to provision the Amplify infrastructure. This includes resources like AWS Amplify App, Branch, and Domain.
 
-## Deploy on Vercel
+Run terraform init to initialize the Terraform project.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run terraform plan to preview the changes that will be applied to your AWS account.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If the plan looks good, run terraform apply to create the Amplify infrastructure on AWS.
+
+Step 4: Setup CI/CD Pipeline with Amplify's Inbuilt Functionality
+AWS Amplify automatically sets up a CI/CD pipeline for your application when you connect it to a Git repository. There is no additional configuration required on the Amplify side.
+
+Step 5: Update the GitHub Repository
+Once Terraform has successfully provisioned the Amplify infrastructure, you'll need to update the GitHub repository with the new Amplify configuration.
+
+Add the Terraform files (main.tf, variables.tf, etc.) to the root of your Next.js application repository.
+
+Commit and push the changes to the repository.
